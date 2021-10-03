@@ -7,8 +7,9 @@ RUN apt-get update && apt-get install vim -y && \
     apt-get install wget -y && \
     apt-get install git -y && \
     apt-get install procps -y && \
+    apt-get install -y --no-install-recommends libffi-dev && \
     apt-get install htop -y
 
-RUN docker-php-ext-install mysqli pdo_mysql
+RUN docker-php-ext-install mysqli pdo_mysql ffi
 
-COPY ./rootfilesystem/ /
+COPY ./ /var/www

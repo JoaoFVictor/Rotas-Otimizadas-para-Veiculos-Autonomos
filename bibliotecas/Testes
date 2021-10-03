@@ -1,0 +1,9 @@
+#include "BuscaEmLargura.h"
+
+int main(void){
+    BuscaEmLargura * objeto = new BuscaEmLargura;
+    objeto->calcularRota(10, 20);
+    delete objeto;
+
+    return 0;
+}

@@ -23,11 +23,10 @@ $server->on('Open', function(Server $server, Request $request) {
 });
 
 $server->on('Message', function(Server $server, Frame $frame) {
-    $parametrosDto = new ParametrosDto();
     $algoritimos = new Algoritimos();
 
     echo "received message: {$frame->data}\n";
-    $parametrosDto->tratarEntrada($frame->data);
+    $parametrosDto = ParametrosDto::tratarEntrada($frame->data);
     $rota = $algoritimos->calcularRota($parametrosDto);
     $server->push($frame->fd, json_encode(["rota" => $rota]));
 });

@@ -4,40 +4,47 @@ namespace DataTransferObject;
 
 class ParametrosDto
 {
-    private int $tipoDeBusca;
-    private int $tamanhoHorizontalMapa;
-    private int $tamanhoVerticallMapa;
-    private int $pontoInicialX;
-    private int $pontoInicialY;
-    private int $pontoFinalX;
-    private int $pontoFinalY;
-    private string $mapa;
+    public int $tipoDeBusca;
+    public int $tamanhoHorizontalMapa;
+    public int $tamanhoVerticallMapa;
+    public int $pontoInicialX;
+    public int $pontoInicialY;
+    public int $pontoFinalX;
+    public int $pontoFinalY;
+    public string $mapa;
 
-    public function tratarEntrada(string $dados): void
-    {
-        $json = json_decode($dados);
-        $this->tipoDeBusca = $json->tipo_de_busca;
-        $this->tamanhoHorizontalMapa = $json->tamanho_horizontal_mapa;
-        $this->tamanhoVerticallMapa = $json->tamanho_vertical_mapa;
-        $this->pontoInicialX = $json->ponto_inicial_x;
-        $this->pontoInicialY = $json->ponto_inicial_y;
-        $this->pontoFinalX = $json->ponto_final_x;
-        $this->pontoFinalY = $json->ponto_final_y;
-        $this->mapa = $json->mapa;
+    public function __construct(
+        int $tipoDeBusca,
+        int $tamanhoHorizontalMapa,
+        int $tamanhoVerticallMapa,
+        int $pontoInicialX,
+        int $pontoInicialY,
+        int $pontoFinalX,
+        int $pontoFinalY,
+        string $mapa
+    ) {
+        $this->tipoDeBusca = $tipoDeBusca;
+        $this->tamanhoHorizontalMapa = $tamanhoHorizontalMapa;
+        $this->tamanhoVerticallMapa = $tamanhoVerticallMapa;
+        $this->pontoInicialX = $pontoInicialX;
+        $this->pontoInicialY = $pontoInicialY;
+        $this->pontoFinalX = $pontoFinalX;
+        $this->pontoFinalY = $pontoFinalY;
+        $this->mapa = $mapa;
     }
 
-    public function getDadosEntradaTratado(): object
+    public static function tratarEntrada(string $dados): static
     {
-        $dto = new \stdClass;
-        $dto->tipoDeBusca = $this->tipoDeBusca;
-        $dto->tamanhoHorizontalMapa = $this->tamanhoHorizontalMapa;
-        $dto->tamanhoVerticallMapa = $this->tamanhoVerticallMapa;
-        $dto->pontoInicialX = $this->pontoInicialX;
-        $dto->pontoInicialY = $this->pontoInicialY;
-        $dto->pontoFinalX = $this->pontoFinalX;
-        $dto->pontoFinalY = $this->pontoFinalY;
-        $dto->mapa = $this->mapa;
-
-        return $dto;
+        $json = json_decode($dados);
+        return new static(
+            $json->tipo_de_busca,
+            $json->tamanho_horizontal_mapa,
+            $json->tamanho_vertical_mapa,
+            $json->ponto_inicial_x,
+            $json->ponto_inicial_y,
+            $json->ponto_final_x,
+            $json->ponto_final_y,
+            $json->mapa,
+        );
     }
 }

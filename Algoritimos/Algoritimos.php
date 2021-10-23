@@ -15,15 +15,15 @@ class Algoritimos
     public function calcularRota(ParametrosDto $parametrosDto): string
     {
         $cabecalho = new Cabecalhos();
-        $dados = $parametrosDto->getDadosEntradaTratado();
-        $mapa = &$dados->mapa;
+        var_dump($parametrosDto);
+        $mapa = &$parametrosDto->mapa;
 
         $ffi = FFI::cdef($cabecalho(), self::CAMINHO_ARQUIVO_BIBLIOTECA);
-        $structAlgoritimo = $this->setStructAlgoritimo($ffi, $dados);
+        $structAlgoritimo = $this->setStructAlgoritimo($ffi, $parametrosDto);
         return $ffi->calcularRota($structAlgoritimo, $mapa);
     }
 
-    private function setStructAlgoritimo(FFI $ffi, object $dados): CData
+    private function setStructAlgoritimo(FFI $ffi, ParametrosDto $dados): CData
     {
         $algoritimo = $ffi->new('ParametrosAlgoritimo');
         $algoritimo->tipoDeBusca = $dados->tipoDeBusca;

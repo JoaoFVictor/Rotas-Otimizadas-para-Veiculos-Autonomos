@@ -15,7 +15,6 @@ class Algoritimos
     public function calcularRota(ParametrosDto $parametrosDto): string
     {
         $cabecalho = new Cabecalhos();
-        var_dump($parametrosDto);
         $mapa = &$parametrosDto->mapa;
 
         $ffi = FFI::cdef($cabecalho(), self::CAMINHO_ARQUIVO_BIBLIOTECA);
